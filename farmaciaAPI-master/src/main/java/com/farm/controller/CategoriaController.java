@@ -32,20 +32,19 @@ public class CategoriaController {
 	@GetMapping
 	public ResponseEntity<List<CategoriaModel>> findAllCategoria(){
 		return ResponseEntity.ok(categoriaRepository.findAll());
-	}@GetMapping("/catandid")
-	public ResponseEntity<List<CategoriaModel>> findIdANDCategoria(){
-		return ResponseEntity.ok(categoriaRepository.findAllByIdANDnomeCategoria);
+	}
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<CategoriaModel>> findByDescricao(@PathVariable String descricao){
+		return ResponseEntity.ok(categoriaRepository.findByDescricaoContainingIgnoreCase(descricao));
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<CategoriaModel> GetById(@PathVariable long id){
 		return categoriaRepository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
-
 	@PostMapping
 	public ResponseEntity<CategoriaModel> postCategoria(@RequestBody CategoriaModel categoria){
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaRepository.save(categoria));
 	}
-	
 	@PutMapping
 	public ResponseEntity<CategoriaModel> putCategoria(@RequestBody CategoriaModel categoria){
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaRepository.save(categoria));

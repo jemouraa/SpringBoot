@@ -25,17 +25,23 @@ public class CategoriaModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	public String descricao;
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public List<ProdutosModel> getProdutos() {
 		return produtos;
 	}
-
 	public void setProdutos(List<ProdutosModel> produtos) {
 		this.produtos = produtos;
 	}
@@ -44,7 +50,6 @@ public class CategoriaModel {
 	@Size(min = 3, max = 45)
 	private String nomeCategoria;
 
-	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("categoria")
 	private List<ProdutosModel> produtos;
